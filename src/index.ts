@@ -1,5 +1,24 @@
-import { init, exit } from "./myPackage";
+import crypto from "crypto";
 
-init({ url: ":)", debug: false });
+interface BlockShape {
+  hash: string;
+  prevHash: string;
+  height: number;
+  data: string;
+}
 
-exit(11);
+class Block implements BlockShape {
+  public hash: string;
+  constructor(
+    public prevHash: string,
+    public height: number,
+    public data: string
+  ) {
+    this.hash = Block.calculateHash(prevHash, height, data);
+  }
+
+  static calculateHash(prevHash: string, height: number, data: string): string {
+    const toHash = `${prevHash}${height}${data}`;
+    return "";
+  }
+}
